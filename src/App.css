@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "LcdSolid";
+  src: local("LcdSolid"), url(./fonts/LcdSolid-VPzB.ttf) format("truetype");
+}
+
+body {
+  font-family: LcdSolid;
+}
+
 .App {
   text-align: center;
 }
