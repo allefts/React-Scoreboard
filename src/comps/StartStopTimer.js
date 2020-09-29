@@ -5,53 +5,42 @@ class StartStopTimer extends Component {
     super(props);
 
     this.state = {
-      minutes: 0,
-      seconds: 0,
       active: false,
+      timeLeft: 0,
     };
 
-    this.StartorStop = this.StartorStop.bind(this);
-    this.tick = this.tick.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
   }
 
-  StartorStop(e, minutes, seconds) {
+  startTimer(e) {
     e.preventDefault();
-    if (e.target.name === "Start" || this.state.active === false) {
+    if (this.state.active === false) {
       this.setState({ active: true });
-      this.timer = setInterval(
-        () => this.setState({ seconds: this.state.seconds - 1 }),
-        1000
-      );
-    } else if (e.target.name === "Stop" || this.state.active === true) {
-      this.setState({ active: false });
-      clearInterval(this.timer);
     }
   }
 
-  tick(e) {}
+  stopTimer(e) {
+    e.preventDefault();
+    if (this.state.active === true) {
+      this.setState({ active: false });
+    }
+  }
 
   render() {
+    const { minutes, seconds } = this.props;
     return (
       <div style={{ display: "flex" }}>
-        <p>{this.state.minutes}</p>
+        <p>{minutes}</p>
         <p>:</p>
-        <p>{this.state.seconds}</p>
+        <p>{seconds}</p>
 
         <button
-          name="Start"
-          onClick={(e) => {
-            this.StartorStop(e, this.props.minutes, this.props.seconds);
-          }}
+          onClick={
+            this.state.active === true ? this.stopTimer : this.startTimer
+          }
         >
-          Start
-        </button>
-        <button
-          name="Stop"
-          onClick={(e) => {
-            this.StartorStop(e, this.props.minutes, this.props.seconds);
-          }}
-        >
-          Stop
+          {this.state.active === true ? "Stop" : "Start"}
         </button>
       </div>
     );
