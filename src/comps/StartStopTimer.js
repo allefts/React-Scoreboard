@@ -6,6 +6,7 @@ class StartStopTimer extends Component {
 
     this.state = {
       active: false,
+      updated: false,
       timeLeft: 0,
     };
 
@@ -13,31 +14,53 @@ class StartStopTimer extends Component {
     this.stopTimer = this.stopTimer.bind(this);
   }
 
-  startTimer(e) {
+  componentDidMount() {
+    console.log("Mounted");
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      updated: false,
+    });
+  }
+
+  startTimer(e, timeRemaining) {
     e.preventDefault();
     if (this.state.active === false) {
       this.setState({ active: true });
+      this.timer = setInterval(() => {
+        this.setState({ timeLeft: timeRemaining - 1 });
+        console.log(this.state.timeLeft);
+      }, 1000);
     }
   }
 
-  stopTimer(e) {
+  stopTimer(e, timeRemaining) {
     e.preventDefault();
     if (this.state.active === true) {
       this.setState({ active: false });
+      clearInterval(this.timer);
     }
   }
 
   render() {
-    const { minutes, seconds } = this.props;
+    const timeRemaining = this.props.minutes * 60 + this.props.seconds; //When state works i will need to change it to the state
     return (
       <div style={{ display: "flex" }}>
-        <p>{minutes}</p>
+        <p>{this.props.minutes}</p>
+        {/* change to state */}
         <p>:</p>
-        <p>{seconds}</p>
-
+        <p>{this.props.seconds}</p>
+        {/* change to state */}
         <button
           onClick={
-            this.state.active === true ? this.stopTimer : this.startTimer
+            this.state.active === true
+              ? (e) => {
+                  this.stopTimer(e, timeRemaining);
+                }
+              : (e) => {
+                  this.startTimer(e, timeRemaining);
+                }
           }
         >
           {this.state.active === true ? "Stop" : "Start"}

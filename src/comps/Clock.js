@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import StartStopTimer from "./StartStopTimer";
+// import StartStopTimer from "./StartStopTimer";
+import TimerFunction from "./TimerFunction";
 
 class Clock extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class Clock extends Component {
     this.state = {
       minutes: 0,
       seconds: 0,
+      clicked: false,
     };
 
     // let minutes;
@@ -30,10 +32,16 @@ class Clock extends Component {
   render() {
     return (
       <div>
-        <StartStopTimer
+        {/* <StartStopTimer
+          minutes={this.state.minutes}
+          seconds={this.state.seconds}
+        /> */}
+
+        <TimerFunction
           minutes={this.state.minutes}
           seconds={this.state.seconds}
         />
+
         <form action="form">
           <input
             type="number"
