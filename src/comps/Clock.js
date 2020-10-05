@@ -1,70 +1,51 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 // import StartStopTimer from "./StartStopTimer";
-import TimerFunction from "./TimerFunction";
+import Timer from "./TimerFunction";
 
-class Clock extends Component {
-  constructor(props) {
-    super(props);
+const Clock = () => {
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [submittedMinutes, setSubmittedMinutes] = useState(0);
+  const [submittedSeconds, setSubmittedSeconds] = useState(0);
 
-    this.state = {
-      minutes: 0,
-      seconds: 0,
-      clicked: false,
-    };
+  const submit = () => {
+    setSubmittedMinutes(minutes);
+    setSubmittedSeconds(seconds);
+  };
 
-    // let minutes;
-    // let seconds;
-
-    this.handleTimerChange = this.handleTimerChange.bind(this);
-    this.sendTimerChange = this.sendTimerChange.bind(this);
-  }
-
-  handleTimerChange(e) {
-    e.target.name === "minutes"
-      ? (this.minutes = e.target.value)
-      : (this.seconds = e.target.value);
-  }
-
-  sendTimerChange(e) {
-    this.setState({ minutes: this.minutes, seconds: this.seconds });
-  }
-
-  render() {
-    return (
+  return (
+    <>
+      <Timer minutes={submittedMinutes} seconds={submittedSeconds} />
       <div>
-        {/* <StartStopTimer
-          minutes={this.state.minutes}
-          seconds={this.state.seconds}
-        /> */}
-
-        <TimerFunction
-          minutes={this.state.minutes}
-          seconds={this.state.seconds}
-        />
-
         <form action="form">
           <input
             type="number"
             min="0"
             max="60"
             name="minutes"
-            onChange={this.handleTimerChange}
+            value={minutes}
+            onChange={(e) => {
+              setMinutes(e.target.value);
+            }}
           />
           <input
             type="number"
             min="0"
             max="60"
             name="seconds"
-            onChange={this.handleTimerChange}
+            value={seconds}
+            onChange={(e) => {
+              setSeconds(e.target.value);
+            }}
           />
 
-          <button type="reset" onClick={this.sendTimerChange}>
+          <button type="reset" onClick={submit}>
             Set Time:
           </button>
         </form>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
 
 export default Clock;
