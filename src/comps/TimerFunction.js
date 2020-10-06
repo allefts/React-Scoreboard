@@ -9,7 +9,6 @@ const TimerFunction = ({ minutes, seconds }) => {
 
   useEffect(() => {
     setMin(minutes);
-    console.log(minutes);
   }, [minutes]);
 
   useEffect(() => {
@@ -17,52 +16,72 @@ const TimerFunction = ({ minutes, seconds }) => {
   }, [seconds]);
 
   useEffect(() => {
-    setTimeLeft(min * 60 + sec);
-    console.log(timeLeft);
+    console.log(min, sec);
+    setTimeLeft(min * 60 + sec * 1); //FOR SOME REASON IF I DIDNT MULTIPLY THE SECONDS BY 1, IT WOULD SET THE TIME TO 10X WHAT IT WAS SUPPOSOED TO BE
   }, [min, sec]);
+
   // 3 20s
   // 60000 * 3 + 20000 -- 182000
   //NEED TO SWITCH THE BELOW CODE, BECAUSE TIMELEFT IS DECREASING BY 61 EACH SECOND BECAUSE ONE MINUTE AND SECOND ARE GETTING TAKEN OFF EACH INTERVAL
 
   useEffect(() => {
-    if (active) {
+    if (active === true) {
       intervalRef.current = setInterval(() => {
-        setTimeLeft(() => {
+        setTimeLeft((timeLeft) => {
           if (timeLeft > 0) {
             return timeLeft - 1;
           }
           return timeLeft;
         });
-        // setMin((min) => {
-        //   if (min > 0) {
-        //     return min - 1;
-        //   }
-        //   return min;
-        // });
-        // setSec((sec) => {
-        //   if (sec > 0) {
-        //     return sec - 1;
-        //   }
-        //   return sec;
-        // });
       }, 1000);
-    } else {
+    } else if (active === false || timeLeft === 60) {
       clearInterval(intervalRef.current);
     }
+  }, [active]);
 
-    // return () => clearInterval(interval);
-  }, [active, timeLeft]);
+  //BETTER WAY TO DO THE STUFF BELOW? THERE IS BUT DONT WANNA FIND OUT RN
 
-  // var min = Math.floor(timeLeft / 6000).toFixed(0);
-  // var sec = timeLeft % 60;
+  const checkMinutes = (timeLeft) => {
+    if (timeLeft < 60 && timeLeft > 0) {
+      return timeLeft % 60 < 10
+        ? `0${Math.floor(timeLeft % 60)}`
+        : Math.floor(timeLeft % 60);
+    } else {
+      return timeLeft / 60 < 10
+        ? `0${Math.floor(timeLeft / 60)}`
+        : Math.floor(timeLeft / 60);
+    }
+  };
+
+  const checkSeconds = (timeLeft) => {
+    if (timeLeft < 60 && timeLeft > 0) {
+      //TODO
+    } else {
+      return timeLeft % 60 < 10
+        ? `0${Math.floor(timeLeft % 60)}`
+        : Math.floor(timeLeft % 60);
+    }
+  };
 
   return (
     <div style={{ display: "flex" }}>
-      <p>{Math.floor(timeLeft / 6000)}</p>
-      <p>:</p>
-      <p>{Math.floor(timeLeft % 60)}</p>
-      <button onClick={() => setActive(!active)}>
-        {active === true ? "Stop" : "Start"}
+      <p>
+        {checkMinutes(timeLeft)}
+        {/* {timeLeft / 60 < 10
+          ? `0${Math.floor(timeLeft / 60)}`
+          : Math.floor(timeLeft / 60)} */}
+      </p>
+      <p>{timeLeft < 60 ? `.` : `:`}</p>
+      <p>
+        {checkSeconds(timeLeft)}
+        {/* {timeLeft % 60 < 10
+          ? `0${Math.floor(timeLeft % 60)}`
+          : Math.floor(timeLeft % 60)} */}
+      </p>
+      <button
+        onClick={() => (active === true ? setActive(false) : setActive(true))}
+      >
+        {active === true && timeLeft !== 0 ? "Stop" : "Start"}
       </button>
     </div>
   );

@@ -84,7 +84,7 @@ const App = () => {
       <h1>{team2Score}</h1>
       <button onClick={reset}>Reset</button>
 
-      <h2>Fouls</h2>
+      <h2 className="fouls-header">Fouls</h2>
       <Fouls name="Home" />
       <Fouls name="Away" />
 
