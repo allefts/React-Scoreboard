@@ -49,7 +49,7 @@ class StartStopTimer extends Component {
       <div style={{ display: "flex" }}>
         <p>{this.props.minutes}</p>
         {/* change to state */}
-        <p>:</p>
+        <p className="timerColon">:</p>
         <p>{this.props.seconds}</p>
         {/* change to state */}
         <button

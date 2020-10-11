@@ -153,10 +153,11 @@ form h3 {
   justify-content: center;
   font-size: 18rem;
   color: darkblue;
+  font-weight: 900;
 }
 
 .timer {
-  margin: 0.75rem;
+  margin: 2rem auto;
   color: var(--timer-color);
 }
 
