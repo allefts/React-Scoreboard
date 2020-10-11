@@ -64,21 +64,24 @@ const TimerFunction = ({ minutes, seconds }) => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
-      <p>
-        {checkMinutes(timeLeft)}
-        {/* {timeLeft / 60 < 10
+    <div className="timerWrapper">
+      <div className="countdown">
+        <p className="timer">
+          {checkMinutes(timeLeft)}
+          {/* {timeLeft / 60 < 10
           ? `0${Math.floor(timeLeft / 60)}`
           : Math.floor(timeLeft / 60)} */}
-      </p>
-      <p>{timeLeft < 60 ? `.` : `:`}</p>
-      <p>
-        {checkSeconds(timeLeft)}
-        {/* {timeLeft % 60 < 10
+        </p>
+        <p className="timer timerColon">:</p>
+        <p className="timer">
+          {checkSeconds(timeLeft)}
+          {/* {timeLeft % 60 < 10
           ? `0${Math.floor(timeLeft % 60)}`
           : Math.floor(timeLeft % 60)} */}
-      </p>
+        </p>
+      </div>
       <button
+        className="startBtn defBtn"
         onClick={() => (active === true ? setActive(false) : setActive(true))}
       >
         {active === true && timeLeft !== 0 ? "Stop" : "Start"}

@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import "/home/allefts/Documents/React/improved-scoreboard-hopefully/src/App.css";
 
-const Fouls = ({ resetFouls }) => {
+const Fouls = () => {
   const [fouls, setFouls] = useState(0);
-
-  useEffect(() => {
-    setFouls(0);
-  }, [resetFouls]);
 
   return (
     <div>
-      <button value="+" onClick={() => setFouls(fouls + 1)}>
-        +
-      </button>
-      <h1>{fouls}</h1>
-      <button
-        value="-"
-        onClick={() => {
-          if (fouls !== 0) {
-            setFouls(fouls - 1);
-          }
-        }}
-      >
-        -
-      </button>
+      <h1 className="foulsCount">{fouls}</h1>
+      <div>
+        <button
+          className="foulBtnPlus defBtn"
+          value="+"
+          onClick={() => setFouls(fouls + 1)}
+        >
+          +
+        </button>
+        <button
+          className="foulBtnMinus defBtn"
+          value="-"
+          onClick={() => {
+            if (fouls !== 0) {
+              setFouls(fouls - 1);
+            }
+          }}
+        >
+          -
+        </button>
+      </div>
     </div>
   );
 };

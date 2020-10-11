@@ -1,4 +1,5 @@
 import React from "react";
+import "/home/allefts/Documents/React/improved-scoreboard-hopefully/src/App.css";
 
 const TeamInput = ({
   changeTeamName,
@@ -8,28 +9,36 @@ const TeamInput = ({
 }) => {
   return (
     <div>
-      <h2>Home Team: </h2>
-      <h1>{displayedTeam1Name}</h1>
+      <form>
+        <div className="teamWrapper">
+          <h2>Home</h2>
+          <h3>{displayedTeam1Name}</h3>
 
-      <form action="">
-        <input
-          name="Home"
-          type="text"
-          placeholder="Change Home Team Name"
-          onChange={changeTeamName}
-        />
-
-        <h2>Away Team: </h2>
-        <h1>{displayedTeam2Name}</h1>
-        <input
-          name="Away"
-          type="text"
-          placeholder="Change Away Team Name"
-          onChange={changeTeamName}
-        />
-        <button type="reset" onClick={clickChangeTeamName}>
-          Set Team Names
-        </button>
+          <h3>{displayedTeam2Name}</h3>
+          <h2>Away</h2>
+        </div>
+        <div className="inputWrapper">
+          <input
+            name="Home"
+            type="text"
+            placeholder="Change Home Team Name"
+            onChange={changeTeamName}
+          />
+          <button
+            className="reset-btn"
+            type="reset"
+            onClick={clickChangeTeamName}
+          >
+            Set Team Names
+          </button>
+          <input
+            name="Away"
+            type="text"
+            placeholder="Change Away Team Name"
+            onChange={changeTeamName}
+            className="inputToggle"
+          />
+        </div>
       </form>
     </div>
   );

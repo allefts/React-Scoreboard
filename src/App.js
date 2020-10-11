@@ -70,25 +70,37 @@ const App = () => {
         displayedTeam2Name={displayedTeam2Name}
       />
 
-      <Score
-        handleScores={handleScores}
-        name="Home"
-        homeTeamScore={team1Score}
-      />
-      <h1>{team1Score}</h1>
-      <Score
-        handleScores={handleScores}
-        name="Away"
-        awayTeamScore={team2Score}
-      />
-      <h1>{team2Score}</h1>
-      <button onClick={reset}>Reset</button>
-
-      <h2 className="fouls-header">Fouls</h2>
-      <Fouls name="Home" />
-      <Fouls name="Away" />
-
       <Clock />
+      <div className="scoreWrapper">
+        <div className="homeTeamScores">
+          <h1 className="teamScores">{team1Score}</h1>
+          <Score
+            handleScores={handleScores}
+            name="Home"
+            homeTeamScore={team1Score}
+          />
+        </div>
+        <h1 className="scoresHeaders header">Scores</h1>
+        <div className="awayTeamScores">
+          <h1 className="teamScores">{team2Score}</h1>
+          <Score
+            handleScores={handleScores}
+            name="Away"
+            awayTeamScore={team2Score}
+          />
+        </div>
+      </div>
+      <div className="foulHeaderWrapper">
+        <button className="resetBtn defBtn" onClick={reset}>
+          Reset
+        </button>
+      </div>
+
+      <div className="foulScores">
+        <Fouls name="Home" />
+        <h2 className="foulsHeader header">Fouls</h2>
+        <Fouls name="Away" />
+      </div>
     </div>
   );
 };
