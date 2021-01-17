@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "/home/allefts/Documents/React/improved-scoreboard-hopefully/src/App.css";
+import "../App.css";
 
 const Fouls = () => {
   const [fouls, setFouls] = useState(0);

@@ -1,5 +1,5 @@
 import React from "react";
-import "/home/allefts/Documents/React/improved-scoreboard-hopefully/src/App.css";
+import "../App.css";
 
 const Score = ({ handleScores, homeTeamScore, awayTeamScore, name }) => {
   const clickedTeam = name;
